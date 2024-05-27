@@ -12,4 +12,5 @@ public interface StudentService {
 
  public void deleteStudent(long id);
 
+   public Student updateStudentById(long id, Student student);
 }

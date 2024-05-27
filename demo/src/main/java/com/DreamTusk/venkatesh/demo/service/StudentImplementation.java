@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class StudentImplementation implements StudentService{
@@ -35,4 +36,14 @@ public class StudentImplementation implements StudentService{
     }
 
 
+    @Override
+    public Student updateStudentById(long id, Student student){
+        Student studentDB = studentRepository.findById(id).get(); //first get that particular id
+
+        if(Objects.nonNull(student.getStudentName()) && !"".equalsIgnoreCase(student.getStudentName())){
+            studentDB.setStudentName(student.getStudentName());
+        }
+        studentDB.setStudentPercentage(student.getStudentPercentage());
+            return studentRepository.save(studentDB);
+    }
 }
