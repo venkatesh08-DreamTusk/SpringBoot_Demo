@@ -41,7 +41,7 @@ public class StudentController {
 
 
     @GetMapping("/student")
-    public ResponseHandler getStudentByGender(@RequestParam(value = "gender",required = false) String gender){
+    public ResponseHandler getStudent(@RequestParam(value = "gender",required = false) String gender){
         ResponseHandler responseHandler = new ResponseHandler();
         if(gender != null){
             List<Student> students = studentService.getStudentByGender(gender);
