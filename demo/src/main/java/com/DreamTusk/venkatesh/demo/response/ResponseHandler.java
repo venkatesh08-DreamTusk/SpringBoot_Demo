@@ -7,9 +7,6 @@ public class ResponseHandler {
     private Object error;
 
    public ResponseHandler(){
-        this.status = false;
-        this.data   =  data;
-        this.error  = error;
     }
 
     public boolean isStatus() {

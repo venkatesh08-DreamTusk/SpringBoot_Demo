@@ -14,35 +14,78 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @PostMapping("/students")
+    @PostMapping("/getStudent")
     public Student saveStudent(@RequestBody Student student){
         return  studentService.saveStudentDetails(student);
 
     }
 
-    @GetMapping("getStudent")
+    @GetMapping("/getStudent")
     public ResponseHandler getStudentList(){
-        return studentService.getStudents();
+        ResponseHandler responseHandler = new ResponseHandler();
+       List<Student> students =  studentService.getStudents();
+
+        if(!students.isEmpty()){
+            responseHandler.setStatus(true);
+            responseHandler.setData(students);
+            responseHandler.setError(null);
+        }else{
+            responseHandler.setStatus(false);
+            responseHandler.setData(null);
+            responseHandler.setError("Data Not Found");
+        }
+
+        return responseHandler;
     }
 
-    @GetMapping("/getStudentbyID/{id}")
+
+    @GetMapping("/getStudent/{id}")
     public ResponseHandler getStudentById(@PathVariable("id") long id){
-        return studentService.getStudentById(id);
+        ResponseHandler responseHandler = new ResponseHandler();
+        Student student =  studentService.getStudentById(id);
+
+        if(student !=  null){
+            responseHandler.setStatus(true);
+            responseHandler.setData(student);
+            responseHandler.setError(null);
+        }else{
+            responseHandler.setStatus(false);
+            responseHandler.setData(null);
+            responseHandler.setError("Student Not Found");
+        }
+        return responseHandler;
 
     }
+
 
     @GetMapping("/getStudentByGender")
-    public ResponseHandler getStudentByGender(@RequestParam(value = "Gender",required = false) String gender){
-        return studentService.getStudentByGender(gender);
+    public ResponseHandler getStudentByGender(@RequestParam(value = "gender",required = false) String gender){
+        ResponseHandler responseHandler = new ResponseHandler();
+        if(gender != null){
+            List<Student> students = studentService.getStudentByGender(gender);
+            if(!students.isEmpty()){
+                responseHandler.setStatus(true);
+                responseHandler.setData(students);
+                responseHandler.setError(null);
+            }else{
+                responseHandler.setStatus(false);
+                responseHandler.setData(null);
+                responseHandler.setError("Student Not Found");
+            }
+        }else{
+
+            List<Student> students = studentService.getStudents();
+        }
+              return responseHandler;
     }
 
-    @DeleteMapping("/removeStudent/{id}")
+    @DeleteMapping("/getStudent/{id}")
     public String deleteStudentById(@PathVariable("id") long id){
          studentService.deleteStudent(id);
         return "Student Successfully Deleted...";
     }
 
-    @PutMapping("/student/{id}")
+    @PutMapping("/getStudent/{id}")
     public Student updateStudent(@PathVariable("id") long id ,@RequestBody Student student){
         return  studentService.updateStudentById(id,student);
     }
