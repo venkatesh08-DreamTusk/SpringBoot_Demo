@@ -10,43 +10,53 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+
     private long studentID;
-    private String studentName;
-    private double studentPercentage;
+    private String name;
+    private double percentage;
+    private String gender;
 
     public long getStudentID(){
         return studentID;
     }
-    public String getStudentName(){
-        return studentName;
+    public String getName(){
+        return name;
     }
-    public double getStudentPercentage(){
-        return studentPercentage;
+    public double getPercentage(){
+        return percentage;
+    }
+    public String getGender() {
+        return gender;
     }
 
 
     public void setStudentID(long id){
         this.studentID = id;
     }
-    public void setStudentName(String name){
-        this.studentName = name;
+    public void setName(String name){
+        this.name = name;
     }
     public  void setStudentPercentage(double percentage){
-        this.studentPercentage = percentage;
+        this.percentage = percentage;
+    }
+    public void setGender(String studentGender) {
+        this.gender = studentGender;
     }
 
     public Student(){}
 
-   public Student(long id,String name,double percentage){
+   public Student(long id,String name,double percentage,String gender){
         this.studentID  = id;
-        this.studentName = name;
-        this.studentPercentage = percentage;
+        this.name = name;
+        this.percentage = percentage;
+        this.gender = gender;
     }
 
     public  String toString(){
         return "Student ID : "+ studentID+
-               "Student Name : "+ studentName+
-               "Student Percentage : "+ studentPercentage;
+               "Student Name : "+ name+
+               "Student Percentage : "+percentage+
+               "Student Gender : " +gender;
     }
 
 }

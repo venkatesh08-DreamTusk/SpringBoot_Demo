@@ -1,14 +1,15 @@
 package com.DreamTusk.venkatesh.demo.service;
 
 import com.DreamTusk.venkatesh.demo.entity.Student;
+import com.DreamTusk.venkatesh.demo.response.ResponseHandler;
 
-import java.util.List;
 
 public interface StudentService {
   public  Student saveStudentDetails(Student student);
-  public List<Student> getStudents();
+  public ResponseHandler getStudents();
 
- public Student getStudentById(long id);
+ public ResponseHandler getStudentById(long id);
+ public ResponseHandler getStudentByGender(String gender);
 
  public void deleteStudent(long id);
 
