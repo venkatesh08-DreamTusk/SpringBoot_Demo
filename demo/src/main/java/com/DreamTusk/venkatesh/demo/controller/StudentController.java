@@ -44,13 +44,6 @@ public class StudentController {
     public ResponseHandler getStudentByGender(@RequestParam(value = "gender",required = false) String gender){
         ResponseHandler responseHandler = new ResponseHandler();
         if(gender != null){
-
-            if(!genderIsValide(gender)){
-                responseHandler.setStatus(false);
-                responseHandler.setData(null);
-                responseHandler.setError("Gender Not Found");
-                return responseHandler;
-            }
             List<Student> students = studentService.getStudentByGender(gender);
             if(!students.isEmpty()){
                 responseHandler.setStatus(true);
@@ -71,9 +64,6 @@ public class StudentController {
               return responseHandler;
     }
 
-    private  boolean genderIsValide(String gender){
-        return gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female");
-    }
 
     @DeleteMapping("/student/{id}")
     public String deleteStudentById(@PathVariable("id") long id){
